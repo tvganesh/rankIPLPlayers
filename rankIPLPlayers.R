@@ -59,144 +59,32 @@ rr_details <- getTeamBowlingDetails("Rajasthan Royals",dir=".",save=TRUE)
 rcb_details <- getTeamBowlingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
 sh_details <- getTeamBowlingDetails("Sunrisers Hyderabad",dir=".",save=TRUE)
 
-#aa <- list(csk_details,dc_details,dd_details,kxip_details,ktk_details,kkr_details,
-           #mi_details,pw_details,rr_details,rcb_details,sh_details)
+aa <- list(csk_details,dc_details,dd_details,kxip_details,ktk_details,kkr_details,
+           mi_details,pw_details,rr_details,rcb_details,sh_details)
 
+theTeams <-c("Chennai Super Kings","Deccan Chargers","Delhi Daredevils",
+          "Kings XI Punjab", 'Kochi Tuskers Kerala',"Kolkata Knight Riders",
+          "Mumbai Indians", "Pune Warriors","Rajasthan Royals",
+          "Royal Challengers Bangalore","Sunrisers Hyderabad")
 
 o <- data.frame(bowler=character(0),wickets=numeric(0),economyRate=numeric(0))
 
-
-#1, CSK
-bowlers <- unique(csk_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Chennai Super Kings",name=bowlers[x],dir="."),
-        error = function(e) {
-        print("Error!")
-        }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
+for(x in 1:length(aa)){
+    bowlers <- unique(aa[[x]]$bowler)
+    for (y in 1:length(bowlers)){
+        cat("x=",x,"team",theTeams[x],"\n")
+        tryCatch(l <- getBowlerWicketDetails(team=theTeams[x],name=bowlers[y],dir="."),
+                 error = function(e) {
+                     print("Error!")
+                 }
+        )    
+        l <- select(l,bowler,wickets,economyRate)
+        o <-rbind(o,l)
+    }
 }
 
-#2. Deccan Chargers
-bowlers <- unique(dc_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Deccan Chargers",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
+o <- data.frame(bowler=character(0),wickets=numeric(0),economyRate=numeric(0))
 
-#3, Delhi Daredevils
-bowlers <- unique(dd_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Delhi Daredevils",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#4. Kings XI Punjab
-bowlers <- unique(kxip_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Kings XI Punjab",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#5. Kochi Tuskers Kerala
-bowlers <- unique(ktk_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Kochi Tuskers Kerala",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#6. Kolkata Knight Riders
-bowlers <- unique(ktk_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Kolkata Knight Riders",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#7. Mumbai Indians
-bowlers <- unique(mi_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Mumbai Indians",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#8.  Pune Warriors
-bowlers <- unique(pw_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Pune Warriors",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#9. Rajasthan Royals
-bowlers <- unique(rr_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Rajasthan Royals",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#10.  Royal Challengers Bangalore
-bowlers <- unique(rcb_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Royal Challengers Bangalore",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
-
-#11. Sunrisers Hyderabad
-bowlers <- unique(sh_details$bowler)
-for (x in 1:length(bowlers)){
-    tryCatch(l <- getBowlerWicketDetails(team="Sunrisers Hyderabad",name=bowlers[x],dir="."),
-             error = function(e) {
-                 print("Error!")
-             }
-    )    
-    l <- select(l,bowler,wickets,economyRate)
-    o <-rbind(o,l)
-}
 
 bowlers <- unique(o$bowler)
 u <- NULL
@@ -214,8 +102,4 @@ q <- filter(u,matches >= 60)
 
 rankIPLBowlers <- arrange(q,desc(meanWickets),desc(meanER))
 
-m <- mutate(o,matches=n(),meanWickets=mean(wickets),meanER=mean(economyRate))
-m <- select(m,bowler,matches,meanWickets,meanER)
-n <- m[1,]
-o <- rbind(o,n)
 
