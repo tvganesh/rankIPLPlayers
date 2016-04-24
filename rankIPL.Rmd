@@ -1,0 +1,36 @@
+---
+title: "RankIPLPlayers"
+author: "Tinniam V Ganesh"
+date: "April 24, 2016"
+output: html_document
+---
+
+
+
+```{r}
+rm(list=ls())
+library(dplyr)
+setwd("C:/software/cricket-package/cricsheet/cleanup/IPL/rank")
+source("rankIPLBatsmen.R")
+source("rankIPLBowlers.R")
+```
+
+Here is a short post which ranks IPL batsmen and bowlers. These are based on match data
+from [Cricsheet](http://www.cricsheet.org)
+
+## Rank IPL batsmen
+```{r }
+iplBatsmanRank <- rankIPLBatsmen()
+as.data.frame(iplBatsmanRank[1:30,])
+```
+
+## Rank IPL bowlers
+
+```{r}
+setwd("C:/software/cricket-package/cricsheet/cleanup/IPL/rank")
+iplBowlersRank <- rankIPLBowlers()
+as.data.frame(iplBowlersRank[1:30,])
+```
+
+
+
