@@ -42,16 +42,18 @@ rankIPLBowlers <- function() {
                      error = function(e) {
                          #print("Error!")
                          
-                    }
+                     }
                      
             )
-             
-            m <- select(l,bowler,wickets,economyRate)
-            o <-rbind(o,m)
+            if(exists("l")){
+            
+               m <- select(l,bowler,wickets,economyRate)
+               o <-rbind(o,m)
+            }
             
         }
     }
-    
+    print(dim(o))
     bowlers <- unique(o$bowler)
     print(getwd())
     u <- NULL
@@ -69,5 +71,7 @@ rankIPLBowlers <- function() {
     
     IPLBowlersRank <- arrange(q,desc(meanWickets),desc(meanER))
     IPLBowlersRank
+    
+    
     
 }
